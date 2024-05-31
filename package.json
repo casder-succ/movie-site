@@ -1,0 +1,24 @@
+{
+  "name": "movie-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "turbo run development",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/casder-succ/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "turbo": "^1.13.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
