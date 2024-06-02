@@ -1,20 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 
-import { createLogger, transports } from 'winston';
+import { createLogger } from 'winston';
 import { WinstonModule } from 'nest-winston';
 
 import { AppModule } from './app.module';
 
+import loggerConfig from './config/logger.config';
+
 async function bootstrap() {
-  const loggerInstancee = createLogger({
-    transports: [
-      new transports.Console(),
-    ],
-  });
+  const loggerInstance = createLogger(loggerConfig);
 
   const app = await NestFactory.create(AppModule, {
     logger: WinstonModule.createLogger({
-      instance: loggerInstancee,
+      instance: loggerInstance,
     }),
   });
 
