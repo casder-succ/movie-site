@@ -1,0 +1,17 @@
+.header {
+    @media (max-width: 750px) {
+        &[data-desktop] {
+            display: none;
+        }
+    }
+
+    @media (min-width: 751px) {
+        &[data-mobile] {
+            display: none;
+        }
+    }
+}
+
+[data-mantine-color-scheme="dark"] .header {
+    border-color: var(--mantine-color-dark-8);
+}

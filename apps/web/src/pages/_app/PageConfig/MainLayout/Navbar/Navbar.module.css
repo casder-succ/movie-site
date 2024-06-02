@@ -1,0 +1,26 @@
+.navbar {
+    width: 1px;
+    opacity: 0;
+    padding: 0;
+
+    transition: width 0.2ms linear;
+
+    &[data-opened] {
+        opacity: 1;
+        padding: 1rem;
+        width: min(250px, 100vw);
+    }
+
+    @media (max-width: 578px) {
+        &[data-opened] {
+            opacity: 1;
+            padding: 1rem;
+            width: 100vw;
+        }
+    }
+}
+
+[data-mantine-color-scheme="dark"] .navbar {
+    background-color: var(--mantine-color-dark-8);
+    border-color: var(--mantine-color-dark-7);
+}

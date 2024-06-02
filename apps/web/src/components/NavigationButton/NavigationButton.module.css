@@ -1,0 +1,45 @@
+.navigationButton {
+    display: flex;
+    position: relative;
+    gap: 8px;
+    height: 32px;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: capitalize;
+    padding: 4px 8px;
+    align-items: center;
+
+    & .icon {
+        display: flex;
+        align-items: end;
+        align-self: start;
+    }
+}
+
+[data-mantine-color-scheme="dark"] .navigationButton {
+    color: var(--mantine-color-dark-1);
+
+    &[data-active] {
+        color: var(--mantine-color-white);
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: calc(-1rem - 3px);
+            transform: translateX(-50%);
+            width: 5px;
+            height: 32px;
+            background-color: var(--mantine-color-red-6);
+            border-radius: 4px 0 0 4px;
+        }
+    }
+
+    &[data-active] .icon {
+        color: var(--mantine-color-red-6);
+    }
+
+    &:hover:not([data-active]) {
+        color: var(--mantine-color-dark-0);
+    }
+}

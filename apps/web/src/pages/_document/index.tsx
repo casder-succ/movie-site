@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { Html, Main, Head, NextScript } from 'next/document';
@@ -9,10 +11,6 @@ const Document = () => (
     <Head>
       <ColorSchemeScript />
 
-      <meta
-        name="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-      />
       <link
         type="image/png"
         sizes="96x96"

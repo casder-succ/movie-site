@@ -8,6 +8,7 @@ import { MantineProvider } from '@mantine/core';
 import { theme } from 'theme';
 
 import '@mantine/core/styles.css';
+import PageConfig from './PageConfig';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => (
   <>
@@ -15,10 +16,21 @@ const App: FC<AppProps> = ({ Component, pageProps }) => (
       <title>
         Casder movie
       </title>
+
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+      />
     </Head>
 
-    <MantineProvider theme={theme} withGlobalClasses>
-      <Component {...pageProps} />
+    <MantineProvider
+      theme={theme}
+      withGlobalClasses
+      defaultColorScheme="dark"
+    >
+      <PageConfig>
+        <Component {...pageProps} />
+      </PageConfig>
     </MantineProvider>
   </>
 );
