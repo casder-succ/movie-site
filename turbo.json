@@ -1,7 +1,7 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
-    "dev": {
+    "start:dev": {
       "dependsOn": [
         "^build"
       ],
@@ -19,7 +19,7 @@
       ]
     },
     "development": {
-      "dependsOn": ["dev"],
+      "dependsOn": ["start:dev"],
       "cache": false
     },
     "precommit": {
