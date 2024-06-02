@@ -15,7 +15,7 @@ const Document = () => (
         type="image/png"
         sizes="96x96"
         rel="icon"
-        href="/icons8-movie-96.png"
+        href="/favicon.png"
       />
       <link
         rel="preconnect"
