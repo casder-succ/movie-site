@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 
 import { LoggerInterceptor } from './logger/logger.interceptor';
 import { getDataBaseConfig } from './config/db.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { getDataBaseConfig } from './config/db.config';
       useFactory: getDataBaseConfig,
       inject: [ConfigService],
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

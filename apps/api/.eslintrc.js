@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'arrow-body-style': 0,
+    'eol-last': ["error", "always"],
     'no-underscore-dangle': 0,
     'function-paren-newline': 1,
     'import/no-extraneous-dependencies': [
