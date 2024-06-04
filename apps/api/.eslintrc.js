@@ -8,13 +8,18 @@ module.exports = {
   plugins: ['@typescript-eslint/eslint-plugin', '@typescript-eslint', 'import'],
   extends: [
     'airbnb-typescript/base',
+    'plugin:import/recommended',
     'plugin:@typescript-eslint/recommended',
   ],
-
   root: true,
   env: {
     node: true,
     jest: true,
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {}
+    }
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
@@ -23,7 +28,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'arrow-body-style': 0,
-    'eol-last': ["error", "always"],
+    'eol-last': ['error', 'always'],
     'no-underscore-dangle': 0,
     'function-paren-newline': 1,
     'import/no-extraneous-dependencies': [

@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { LoggerInterceptor } from './logger/logger.interceptor';
 import { getDataBaseConfig } from './config/db.config';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
       inject: [ConfigService],
     }),
     AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [
