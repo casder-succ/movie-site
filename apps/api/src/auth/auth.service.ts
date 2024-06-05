@@ -9,6 +9,7 @@ import { DocumentTimestamps } from 'common/types/schema.types';
 
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
 
 import { User, UserDocument } from '../users/users.schema';
 
@@ -22,6 +23,27 @@ export class AuthService {
 
   async login(authDto: LoginDto) {
     const user = await this.validateUser(authDto.email, authDto.password);
+
+    const tokenPair = await this.issueTokenPair(String(user._id));
+
+    return {
+      user,
+      ...tokenPair,
+    };
+  }
+
+  async refreshTokens({ refreshToken }: RefreshTokenDto) {
+    if (!refreshToken) {
+      throw new BadRequestException('Invalid refresh token.');
+    }
+
+    const payload = await this.jwtService.verifyAsync(refreshToken);
+
+    if (!payload) {
+      throw new UnauthorizedException('Invalid refresh token.');
+    }
+
+    const user = await this.userModel.findById(payload._id);
 
     const tokenPair = await this.issueTokenPair(String(user._id));
 
