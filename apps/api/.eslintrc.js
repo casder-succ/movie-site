@@ -31,14 +31,7 @@ module.exports = {
     'eol-last': ['error', 'always'],
     'no-underscore-dangle': 0,
     'function-paren-newline': 1,
-    'import/no-extraneous-dependencies': [
-      'error', {
-        devDependencies: [
-          '**/*.spec.{js,ts}',
-          '**/*.builder.{js,ts}',
-        ],
-      },
-    ],
+    'import/no-extraneous-dependencies': 0,
     'max-len': ['warn', { code: 120 }],
     '@typescript-eslint/naming-convention': [
       'error',

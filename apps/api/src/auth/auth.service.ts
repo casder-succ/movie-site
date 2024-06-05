@@ -1,17 +1,90 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { JwtService } from '@nestjs/jwt';
 
 import { Model } from 'mongoose';
 
-import { User } from '../users/users.schema';
+import { SecurityUtil } from 'common/utils/security.util';
+import { DocumentTimestamps } from 'common/types/schema.types';
+
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
+
+import { User, UserDocument } from '../users/users.schema';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User & DocumentTimestamps>,
+    private readonly securityUtil: SecurityUtil,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  async register(registerDto: any) {
-    const createdUser = new this.userModel(registerDto);
+  async login(authDto: LoginDto) {
+    const user = await this.validateUser(authDto.email, authDto.password);
 
-    return createdUser.save();
+    const tokenPair = await this.issueTokenPair(String(user._id));
+
+    return {
+      user,
+      ...tokenPair,
+    };
+  }
+
+  async register(registerDto: RegisterDto) {
+    const isUserExist = await this.userModel.findOne({ email: registerDto.email });
+
+    if (isUserExist) {
+      throw new BadRequestException('User already exists.');
+    }
+
+    const passwordHash = await this.securityUtil.hashText(registerDto.password);
+
+    const createdUser = new this.userModel({
+      email: registerDto.email,
+      name: registerDto.name,
+      password: passwordHash,
+    });
+
+    const tokenPair = await this.issueTokenPair(String(createdUser._id));
+
+    return {
+      user: createdUser,
+      ...tokenPair,
+    };
+  }
+
+  private async validateUser(email: string, password: string): Promise<UserDocument> {
+    const user = await this.userModel.findOne({ email });
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials.');
+    }
+
+    const isPasswordMatch = await this.securityUtil.compareTextWithHash(password, user.password);
+
+    if (!isPasswordMatch) {
+      throw new UnauthorizedException('Invalid credentials.');
+    }
+
+    return user;
+  }
+
+  async issueTokenPair(userId: string) {
+    const payload = { _id: userId };
+
+    const [accessToken, refreshToken] = await Promise.all([
+      this.jwtService.signAsync(payload, {
+        expiresIn: '1h',
+      }),
+      this.jwtService.signAsync(payload, {
+        expiresIn: '15d',
+      }),
+    ]);
+
+    return {
+      accessToken,
+      refreshToken,
+    };
   }
 }

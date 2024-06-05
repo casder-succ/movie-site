@@ -14,7 +14,7 @@ import { User, usersSchema } from './users.schema';
         schema: usersSchema,
       },
     ]),
-    ConfigModule,
+    ConfigModule.forRoot(),
   ],
   providers: [UsersService],
   controllers: [UsersController],
