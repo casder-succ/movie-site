@@ -28,6 +28,8 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'arrow-body-style': 0,
+    "indent": ["error", 2, { "ignoredNodes": ["PropertyDefinition"] }],
+    "@typescript-eslint/indent": ["error", 2, { "ignoredNodes": ["PropertyDefinition"] }],
     'eol-last': ['error', 'always'],
     'no-underscore-dangle': 0,
     'function-paren-newline': 1,

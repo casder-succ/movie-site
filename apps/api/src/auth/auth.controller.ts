@@ -1,12 +1,14 @@
 import { Body, Controller, Get, HttpCode, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 
+import { User } from 'common/decorators/user.decorator';
+
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
 
 import { AuthService } from './auth.service';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
+
 import { Auth } from './decorators/auth.decorator';
-import { User } from '../users/decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
