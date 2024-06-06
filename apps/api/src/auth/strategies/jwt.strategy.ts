@@ -1,16 +1,16 @@
+import { Request } from 'express';
+import { Model } from 'mongoose';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+
 import { PassportStrategy } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Request } from 'express';
-
-import { Model } from 'mongoose';
-import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { DocumentTimestamps } from 'common/types/schema.types';
 
-import { User, UserDocument } from '../../users/users.schema';
+import { User, UserDocument } from 'users/users.schema';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

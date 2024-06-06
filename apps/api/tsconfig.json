@@ -19,6 +19,8 @@
     "baseUrl": "./",
     "paths": {
       "common/*": ["src/common/*"],
+      "users/*": ["src/users/*"],
+      "auth/*": ["src/auth/*"],
     }
   }
 }
