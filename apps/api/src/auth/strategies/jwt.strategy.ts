@@ -13,7 +13,7 @@ import { User, UserDocument } from '../../users/users.schema';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    private readonly configService: ConfigService,
+    configService: ConfigService,
     @InjectModel(User.name) private userModel: Model<User & DocumentTimestamps>,
   ) {
     super({

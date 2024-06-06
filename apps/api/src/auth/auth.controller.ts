@@ -1,10 +1,12 @@
-import { Body, Controller, HttpCode, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 
 import { AuthService } from './auth.service';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { Auth } from './decorators/auth.decorator';
+import { User } from '../users/decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -29,5 +31,11 @@ export class AuthController {
   @Post('login')
   login(@Body() authDto: LoginDto) {
     return this.authService.login(authDto);
+  }
+
+  @Auth('admin')
+  @Get('profile')
+  getProfile(@User('_id') userId: string) {
+    return this.authService.getProfile(userId);
   }
 }

@@ -8,5 +8,4 @@ import { User } from './users.schema';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
-
 }

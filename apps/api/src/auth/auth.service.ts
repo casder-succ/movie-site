@@ -109,4 +109,14 @@ export class AuthService {
       refreshToken,
     };
   }
+
+  async getProfile(userId: string) {
+    const user = await this.userModel.findById(userId).exec();
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials.');
+    }
+
+    return user;
+  }
 }
