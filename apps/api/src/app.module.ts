@@ -10,6 +10,7 @@ import { LoggerInterceptor } from './logger/logger.interceptor';
 import { getDataBaseConfig } from './config/db.config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { GenresModule } from './genres/genres.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { UsersModule } from './users/users.module';
     }),
     AuthModule,
     UsersModule,
+    GenresModule,
   ],
   controllers: [AppController],
   providers: [
