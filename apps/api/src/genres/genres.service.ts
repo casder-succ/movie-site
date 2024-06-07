@@ -55,9 +55,8 @@ export class GenresService {
 
   async update(genreId: string, updatedGenre: UpdateGenreDto) {
     const genre = await this.getById(genreId);
-    const filledFields = Object.fromEntries(Object.entries(updatedGenre).filter(([, v]) => v != null));
 
-    genre.set(filledFields).save();
+    genre.set(updatedGenre).save();
 
     return { genre };
   }

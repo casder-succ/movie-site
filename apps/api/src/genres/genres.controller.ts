@@ -54,7 +54,7 @@ export class GenresController {
     return this.genresService.create(createGenreDto);
   }
 
-  @UsePipes(new ValidationPipe())
+  @UsePipes(new ValidationPipe({ skipMissingProperties: true }))
   @Put(':genreId')
   @Auth('admin')
   async update(
