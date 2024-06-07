@@ -19,6 +19,7 @@ import { AppService } from './app.service';
 import { LoggerInterceptor } from './logger/logger.interceptor';
 import { FilesModule } from './files/files.module';
 import { ActorsModule } from './actors/actors.module';
+import { MoviesModule } from './movies/movies.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { ActorsModule } from './actors/actors.module';
     GenresModule,
     FilesModule,
     ActorsModule,
+    MoviesModule,
   ],
   controllers: [AppController],
   providers: [
