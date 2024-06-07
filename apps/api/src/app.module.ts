@@ -1,4 +1,5 @@
-import { join } from 'path';
+// eslint-disable-next-line import/named
+import { path } from 'app-root-path';
 
 import { Logger, Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
@@ -16,6 +17,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { LoggerInterceptor } from './logger/logger.interceptor';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -26,11 +28,13 @@ import { LoggerInterceptor } from './logger/logger.interceptor';
       inject: [ConfigService],
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: `${path}/apps/api/public/uploads`,
+      serveRoot: '/public/uploads',
     }),
     AuthModule,
     UsersModule,
     GenresModule,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [
