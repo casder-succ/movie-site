@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 import { User } from './users.schema';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -60,6 +60,56 @@ export class UsersService {
       user: await this.userModel.findByIdAndDelete(userId, {
         new: true,
       }),
+    };
+  }
+
+  async addFavourite(userId: string, movieId: Types.ObjectId) {
+    const user = await this.userModel.findById(userId);
+    const favouriteIds = user.favourites.map((favourite) => (
+      favourite.toString()
+    ));
+
+    if (favouriteIds.includes(movieId.toString())) {
+      return { user };
+    }
+
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      user._id,
+      { $push: { favourites: movieId } },
+      { new: true },
+    );
+
+    return {
+      user: updatedUser,
+    };
+  }
+
+  async removeFavourite(userId: string, movieId: Types.ObjectId) {
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      userId,
+      { $pull: { favourites: movieId } },
+      { new: true },
+    );
+
+    return {
+      user: updatedUser,
+    };
+  }
+
+  async getFavourites(userId: string) {
+    const user = await this.userModel
+      .findById(userId)
+      .populate({
+        path: 'favourites',
+        populate: {
+          path: 'genres',
+        },
+      })
+      .exec();
+    const favourites = user.favourites;
+
+    return {
+      favourites,
     };
   }
 

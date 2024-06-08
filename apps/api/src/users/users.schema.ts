@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
 import { DocumentTimestamps } from 'common/types/schema.types';
+import { Movie } from '../movies/movies.schema';
 
 export type UserDocument = HydratedDocument<User, DocumentTimestamps>;
 
@@ -20,8 +21,8 @@ export class User {
   @Prop({ default: false, required: true })
     isAdmin: boolean;
 
-  @Prop({ default: [], type: [String] })
-    favourites?: any;
+  @Prop({ default: [], type: [Types.ObjectId], ref: Movie.name })
+    favourites?: Types.ObjectId[];
 }
 
 export const usersSchema = SchemaFactory.createForClass(User);

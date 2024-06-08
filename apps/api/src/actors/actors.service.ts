@@ -33,12 +33,44 @@ export class ActorsService {
   }
 
   async list(searchQuery?: string) {
-    const actors = await this.actorsModel.find({
+    const options = {
       $or: [
-        { name: { $regex: searchQuery || '', $options: 'i' } },
-        { slug: { $regex: searchQuery || '', $options: 'i' } },
+        {
+          name: {
+            $regex: searchQuery || '',
+            $options: 'i',
+          },
+        },
+        {
+          slug: {
+            $regex: searchQuery || '',
+            $options: 'i',
+          },
+        },
       ],
-    });
+    };
+
+    const actors = await this.actorsModel
+      .aggregate()
+      .match(options)
+      .lookup({
+        from: 'movies',
+        localField: '_id',
+        foreignField: 'actors',
+        as: 'movies',
+      })
+      .addFields({
+        moviesCount: { $size: '$movies' },
+      })
+      .sort({
+        createdAt: -1,
+      })
+      .project({
+        __v: 0,
+        updatedAt: 0,
+        movies: 0,
+      })
+      .exec();
 
     return { actors };
   }

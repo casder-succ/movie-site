@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { HydratedDocument, Types } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
+
+import { Genre } from 'genres/genres.schema';
+import { Actor } from 'actors/actors.schema';
 
 import { DocumentTimestamps } from 'common/types/schema.types';
-import { Actor } from '../actors/actors.schema';
-import { Genre } from 'genres/genres.schema';
 
 export type MovieDocument = HydratedDocument<Movie, DocumentTimestamps>;
 
@@ -48,10 +49,10 @@ export class Movie {
   @Prop()
   videoUrl: string;
 
-  @Prop({ type: Types.ObjectId, ref: Genre.name })
+  @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: Genre.name })
   genres: Genre[];
 
-  @Prop({ type: Types.ObjectId, ref: Actor.name })
+  @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: Actor.name })
   actors: Actor[];
 
   @Prop({ default: false })

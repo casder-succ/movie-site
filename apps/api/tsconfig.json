@@ -22,6 +22,7 @@
       "users/*": ["src/users/*"],
       "auth/*": ["src/auth/*"],
       "genres/*": ["src/genres/*"],
+      "actors/*": ["src/actors/*"],
     }
   }
 }

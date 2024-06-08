@@ -35,6 +35,7 @@ module.exports = {
     'function-paren-newline': 1,
     'import/no-extraneous-dependencies': 0,
     'max-len': ['warn', { code: 120 }],
+    '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/naming-convention': [
       'error',
       {
