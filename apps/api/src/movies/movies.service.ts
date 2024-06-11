@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 import { Movie } from './movies.schema';
 
@@ -94,6 +94,20 @@ export class MoviesService {
     const movie = await this.findById(movieId);
 
     await movie.deleteOne();
+
+    return movie;
+  }
+
+  async updateAverageRating(movieId: Types.ObjectId, rating: number) {
+    const movie = await this.moviesModel.findByIdAndUpdate(
+      { _id: movieId },
+      { rating },
+      { new: true },
+    ).exec();
+
+    if (!movie) {
+      throw new NotFoundException('Movie not found');
+    }
 
     return movie;
   }

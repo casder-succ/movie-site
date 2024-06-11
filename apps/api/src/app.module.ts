@@ -20,6 +20,7 @@ import { LoggerInterceptor } from './logger/logger.interceptor';
 import { FilesModule } from './files/files.module';
 import { ActorsModule } from './actors/actors.module';
 import { MoviesModule } from './movies/movies.module';
+import { RatingsModule } from './ratings/ratings.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { MoviesModule } from './movies/movies.module';
     FilesModule,
     ActorsModule,
     MoviesModule,
+    RatingsModule,
   ],
   controllers: [AppController],
   providers: [

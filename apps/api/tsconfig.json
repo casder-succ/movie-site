@@ -23,6 +23,8 @@
       "auth/*": ["src/auth/*"],
       "genres/*": ["src/genres/*"],
       "actors/*": ["src/actors/*"],
+      "movies/*": ["src/movies/*"],
+      "ratings/*": ["src/ratings/*"],
     }
   }
 }
