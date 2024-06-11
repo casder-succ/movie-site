@@ -3,11 +3,12 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
 
+import { MoviesService } from 'movies/movies.service';
+import { ICollection } from 'genres/genres.interface';
+
 import { Genre } from './genres.schema';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
-import { MoviesService } from 'movies/movies.service';
-import { ICollection } from 'genres/genres.interface';
 
 @Injectable()
 export class GenresService {
