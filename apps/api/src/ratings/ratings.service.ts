@@ -3,9 +3,10 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Model, Types } from 'mongoose';
 
-import { Rating } from './ratings.schema';
-import { UpsertRatingDto } from 'ratings/dto/upsert-rating.dto';
 import { MoviesService } from 'movies/movies.service';
+
+import { Rating } from './ratings.schema';
+import { UpsertRatingDto } from './dto/upsert-rating.dto';
 
 @Injectable()
 export class RatingsService {

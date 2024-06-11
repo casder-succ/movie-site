@@ -19,6 +19,7 @@ import { MoviesService } from './movies.service';
 
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import { Types } from 'mongoose';
 
 @Controller('movies')
 export class MoviesController {
@@ -35,8 +36,8 @@ export class MoviesController {
   }
 
   @Get('genre')
-  async getMoviesByGenre(@Query('genres', new ParseArrayPipe({ separator: ',', items: String })) genreId: string[]) {
-    return this.moviesService.findByGenre(genreId);
+  async getMoviesByGenre(@Query('genres', new ParseArrayPipe({ separator: ',', items: String })) genreIds: Types.ObjectId[]) {
+    return this.moviesService.findByGenre(genreIds);
   }
 
   @Get('actor/:actorId')

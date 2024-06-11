@@ -6,10 +6,15 @@ import { Model } from 'mongoose';
 import { Genre } from './genres.schema';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
+import { MoviesService } from 'movies/movies.service';
+import { ICollection } from 'genres/genres.interface';
 
 @Injectable()
 export class GenresService {
-  constructor(@InjectModel(Genre.name) private genresModel: Model<Genre>) {}
+  constructor(
+    @InjectModel(Genre.name) private genresModel: Model<Genre>,
+    private readonly moviesService: MoviesService,
+  ) {}
 
   async getBySlug(slug: string) {
     const genre = await this.genresModel.findOne({ slug });
@@ -31,10 +36,20 @@ export class GenresService {
     return genre;
   }
 
-  // todo: implement after implementing movies feature
   async getCollections() {
     const genres = await this.genresModel.find().exec();
-    const collections = genres;
+    const collections = await Promise.all(genres.map(async (genre) => {
+      const moviesByGenre = await this.moviesService.findByGenre([genre._id]);
+
+      const result: ICollection = {
+        _id: String(genre._id),
+        image: moviesByGenre.movies[0].poster,
+        slug: genre.slug,
+        title: genre.name,
+      };
+
+      return result;
+    }));
 
     return { collections };
   }

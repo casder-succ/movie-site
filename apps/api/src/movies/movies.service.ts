@@ -48,7 +48,7 @@ export class MoviesService {
     return { movies };
   }
 
-  async findByGenre(genreIds: string[]) {
+  async findByGenre(genreIds: Types.ObjectId[]) {
     const movies = await this.moviesModel
       .find({ genres: { $in: genreIds } })
       .populate('actors genres')
