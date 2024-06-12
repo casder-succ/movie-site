@@ -1,0 +1,17 @@
+.input {
+    & label {
+        text-transform: uppercase;
+        color: var(--mantine-color-gray-6);
+    }
+
+    & input {
+        border-radius: 0;
+        border-width: 0 0 2px;
+        background: unset;
+        padding: 0;
+
+        &:focus, &:focus-within {
+            border-color: var(--mantine-color-red-6);
+        }
+    }
+}

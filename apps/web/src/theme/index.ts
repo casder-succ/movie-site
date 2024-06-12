@@ -1,6 +1,8 @@
 'use client';
 
-import { createTheme, virtualColor } from '@mantine/core';
+import { Button, createTheme, TextInput, virtualColor } from '@mantine/core';
+
+import classes from './input.module.css';
 
 export const theme = createTheme({
   fontFamily: 'Roboto, sans-serif',
@@ -35,5 +37,23 @@ export const theme = createTheme({
       '#59646f',
       '#495764',
     ],
+  },
+  components: {
+    Button: Button.extend({
+      defaultProps: {
+        color: 'primary',
+        style: {
+          borderRadius: 12,
+          height: 'unset',
+          padding: '12px 24px',
+        },
+      },
+    }),
+    TextInput: TextInput.extend({
+      defaultProps: {
+        color: 'primary',
+        className: classes.input,
+      },
+    }),
   },
 });

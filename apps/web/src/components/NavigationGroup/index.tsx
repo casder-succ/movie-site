@@ -20,8 +20,6 @@ const NavigationGroup: FC<NavigationGroupProps> = ({
 }) => {
   const router = useRouter();
 
-  console.log(items);
-
   if (!items?.length && !loading) {
     return null;
   }

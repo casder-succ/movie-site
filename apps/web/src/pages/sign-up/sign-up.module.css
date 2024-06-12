@@ -1,0 +1,25 @@
+.container {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    border-radius: 12px;
+    background-color: var(--mantine-color-dark-9);
+
+    max-width: 60dvw;
+    width: 100%;
+    padding: 32px;
+}
+
+.form {
+    align-items: stretch;
+    align-self: stretch;
+    justify-content: flex-start;
+
+    & .button {
+        align-self: flex-end;
+    }
+}
