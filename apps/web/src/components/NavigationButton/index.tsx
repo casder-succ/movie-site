@@ -1,7 +1,7 @@
 import { FC, ForwardRefExoticComponent, ReactNode } from 'react';
 import Link from 'next/link';
 
-import { UnstyledButton } from '@mantine/core';
+import { Image, UnstyledButton } from '@mantine/core';
 
 import classes from './NavigationButton.module.css';
 
@@ -10,7 +10,7 @@ type NavigationButtonProps = {
   children: ReactNode;
 
   active?: boolean;
-  Icon?: ForwardRefExoticComponent<any>;
+  Icon?: ForwardRefExoticComponent<any> | string;
 };
 
 const NavigationButton: FC<NavigationButtonProps> = ({
@@ -18,23 +18,41 @@ const NavigationButton: FC<NavigationButtonProps> = ({
   href,
   active,
   Icon,
-}) => (
-  <UnstyledButton
-    component={Link}
-    href={href}
-    mod={{ active }}
-    className={classes.navigationButton}
-  >
-    {Icon && (
-      <div className={classes.icon}>
-        <Icon width={20} />
-      </div>
-    )}
+}) => {
+  const getIcon = () => {
+    if (!Icon) {
+      return null;
+    }
 
-    <div>
-      {children}
-    </div>
-  </UnstyledButton>
-);
+    return (
+      typeof Icon === 'string'
+        ? (
+          <div className={classes.icon}>
+            <Image height={24} width={24} src={Icon} />
+          </div>
+        )
+        : (
+          <div className={classes.icon}>
+            <Icon />
+          </div>
+        )
+    );
+  };
+
+  return (
+    <UnstyledButton
+      component={Link}
+      href={href}
+      mod={{ active }}
+      className={classes.navigationButton}
+    >
+      {getIcon()}
+
+      <div>
+        {children}
+      </div>
+    </UnstyledButton>
+  );
+};
 
 export default NavigationButton;

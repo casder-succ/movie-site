@@ -1,16 +1,14 @@
 import {
   IconCompass,
   IconFlame,
-  IconFriends,
   IconHome,
   IconLogout,
-  IconMoodSmile,
-  IconRefresh, IconUserPlus, IconWand,
+  IconRefresh,
 } from '@tabler/icons-react';
 
 import { RoutePath } from 'routes';
 
-import { NavigationGroup, NavigationItem } from './types';
+import { INavigationGroup, NavigationItem, NavigationSource } from './types';
 
 const MENU_GROUP: NavigationItem[] = [
   {
@@ -35,29 +33,6 @@ const MENU_GROUP: NavigationItem[] = [
   },
 ];
 
-const POPULAR_GROUP: NavigationItem[] = [
-  {
-    title: 'Comedy',
-    href: RoutePath.Genre.replace('[genre]', 'comedy'),
-    Icon: IconMoodSmile,
-  },
-  {
-    title: 'Cartoons',
-    href: RoutePath.Genre.replace('[genre]', 'cartoons'),
-    Icon: IconFriends,
-  },
-  {
-    title: 'Fantasy',
-    href: RoutePath.Genre.replace('[genre]', 'fantasy'),
-    Icon: IconWand,
-  },
-  {
-    title: 'Biography',
-    href: RoutePath.Genre.replace('[genre]', 'biography'),
-    Icon: IconUserPlus,
-  },
-];
-
 const GENERAL_GROUP: NavigationItem[] = [
   {
     title: 'Login',
@@ -66,14 +41,14 @@ const GENERAL_GROUP: NavigationItem[] = [
   },
 ];
 
-export const NAVIGATION_GROUPS: NavigationGroup[] = [
+export const NAVIGATION_GROUPS: INavigationGroup[] = [
   {
     title: 'Menu',
     items: MENU_GROUP,
   },
   {
     title: 'Popular genres',
-    items: POPULAR_GROUP,
+    source: NavigationSource.GENRES,
   },
   {
     title: 'General',

@@ -4,7 +4,7 @@ export enum RoutePath {
   FreshMovies = '/fresh-movies',
   TrendingNow = '/trending-now',
 
-  Genre = '/genre/[genre]',
+  Genre = '/genre/[slug]',
 
   SignIn = '/sign-in',
   SignUp = '/sign-up',

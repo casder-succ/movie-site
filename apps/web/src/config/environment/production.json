@@ -1,0 +1,5 @@
+{
+  "API_URL": "http://localhost:3005",
+  "WS_URL": "http://localhost:3005",
+  "WEB_URL": "http://localhost:3000"
+}

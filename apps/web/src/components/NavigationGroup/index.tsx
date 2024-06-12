@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Stack, Title } from '@mantine/core';
+import { Skeleton, Stack, Title } from '@mantine/core';
 
 import NavigationButton from 'components/NavigationButton';
 
@@ -9,11 +9,22 @@ import { useRouter } from 'next/router';
 
 type NavigationGroupProps = {
   title: string;
-  items: NavigationItem[];
+  items?: NavigationItem[];
+  loading?: boolean
 };
 
-const NavigationGroup: FC<NavigationGroupProps> = ({ title, items }) => {
+const NavigationGroup: FC<NavigationGroupProps> = ({
+  title,
+  items,
+  loading = false,
+}) => {
   const router = useRouter();
+
+  console.log(items);
+
+  if (!items?.length && !loading) {
+    return null;
+  }
 
   return (
     <Stack>
@@ -21,7 +32,11 @@ const NavigationGroup: FC<NavigationGroupProps> = ({ title, items }) => {
         {title}
       </Title>
 
-      {items.map((item) => {
+      {loading && (
+        Array(3).fill(<Skeleton height={32} />)
+      )}
+
+      {!loading && items && items.map((item) => {
         const isActive = router.pathname === item.href;
 
         return (

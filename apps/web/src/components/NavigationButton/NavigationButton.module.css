@@ -11,16 +11,29 @@
 
     & .icon {
         display: flex;
+        flex: unset;
         align-items: end;
         align-self: start;
+
+        & img {
+            flex: unset !important;
+        }
     }
 }
 
 [data-mantine-color-scheme="dark"] .navigationButton {
     color: var(--mantine-color-dark-1);
 
+    & img {
+        filter: drop-shadow(0px 1000px 0 var(--mantine-color-dark-1));
+    }
+
     &[data-active] {
         color: var(--mantine-color-white);
+
+        & img {
+            filter: drop-shadow(0px 1000px 0 var(--mantine-color-white));
+        }
 
         &::after {
             content: "";
@@ -37,9 +50,17 @@
 
     &[data-active] .icon {
         color: var(--mantine-color-red-6);
+
+        & img {
+            filter: drop-shadow(0px 1000px 0 var(--mantine-color-red-6));
+        }
     }
 
     &:hover:not([data-active]) {
         color: var(--mantine-color-dark-0);
+
+        & img {
+            filter: drop-shadow(0px 1000px 0 var(--mantine-color-dark-0));
+        }
     }
 }

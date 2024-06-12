@@ -2,13 +2,16 @@ import React, { FC } from 'react';
 
 import Head from 'next/head';
 import { AppProps } from 'next/app';
+import { QueryClientProvider } from '@tanstack/react-query';
 
 import { MantineProvider } from '@mantine/core';
 
 import { theme } from 'theme';
+import queryClient from 'query-client';
+
+import PageConfig from './PageConfig';
 
 import '@mantine/core/styles.css';
-import PageConfig from './PageConfig';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => (
   <>
@@ -23,15 +26,17 @@ const App: FC<AppProps> = ({ Component, pageProps }) => (
       />
     </Head>
 
-    <MantineProvider
-      theme={theme}
-      withGlobalClasses
-      defaultColorScheme="dark"
-    >
-      <PageConfig>
-        <Component {...pageProps} />
-      </PageConfig>
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider
+        theme={theme}
+        withGlobalClasses
+        defaultColorScheme="dark"
+      >
+        <PageConfig>
+          <Component {...pageProps} />
+        </PageConfig>
+      </MantineProvider>
+    </QueryClientProvider>
   </>
 );
 

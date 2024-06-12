@@ -8,6 +8,8 @@ import NavigationGroup from 'components/NavigationGroup';
 import { NAVIGATION_GROUPS } from './constants';
 
 import classes from './Navbar.module.css';
+import { INavigationGroup, NavigationSource } from './types';
+import GenresNavigationGroup from '../../../../../components/GenresNavigationGroup';
 
 type NavbarProps = {
   opened: boolean;
@@ -16,6 +18,23 @@ type NavbarProps = {
 const Navbar: FC<NavbarProps> = ({ opened }) => {
   const { width } = useViewportSize();
 
+  const getNavigationItem = (group: INavigationGroup) => {
+    switch (group.source) {
+      case NavigationSource.GENRES: {
+        return <GenresNavigationGroup key={group.title} />;
+      }
+      default: {
+        return (
+          <NavigationGroup
+            title={group.title}
+            items={group.items}
+            key={group.title}
+          />
+        );
+      }
+    }
+  };
+
   return (
     <AppShell.Navbar
       mod={{ opened: opened || width >= 578 }}
@@ -23,14 +42,7 @@ const Navbar: FC<NavbarProps> = ({ opened }) => {
     >
       <Stack>
         {NAVIGATION_GROUPS
-          .filter(({ items }) => items.length > 0)
-          .map((group) => (
-            <NavigationGroup
-              title={group.title}
-              items={group.items}
-              key={group.title}
-            />
-          ))}
+          .map((group) => getNavigationItem(group))}
       </Stack>
     </AppShell.Navbar>
   );
